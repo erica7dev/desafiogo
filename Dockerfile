@@ -4,7 +4,7 @@ RUN mkdir /build
 WORKDIR /build
 
 RUN export GO111MODULE=on
-RUN go install github.com/erica7dev/desafiogo
+RUN go install github.com/erica7dev/desafiogo@latest
 RUN cd /build && git clone github.com/erica7dev/desafiogo.git
 
 ENTRYPOINT ["/build/desafiogo/main"]
