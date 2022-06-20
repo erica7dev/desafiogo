@@ -1,10 +1,15 @@
-FROM golang:latest
+FROM golang:1.16-buster AS builder
 
-RUN mkdir /build
-WORKDIR /build
+WORKDIR /app
 
-RUN export GO111MODULE=on
-RUN go install github.com/erica7dev/desafiogo@latest
-RUN cd /build && git clone github.com/erica7dev/desafiogo.git
+COPY go.* ./
 
-ENTRYPOINT ["/build/desafiogo/main"]
+RUN go mod download
+
+COPY *.go ./
+
+RUN go build -o /erica7dev_codeeducation
+
+EXPOSE 8080
+
+ENTRYPOINT ["/erica7dev_codeeducation"]
